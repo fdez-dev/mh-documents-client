@@ -1,7 +1,7 @@
 export type DocumentType = 'fe' | 'nc' | 'nd' | 'fse' | 'nre' | 'ctn' | 'anulation';
 
 export interface RequestBody {
-  tipoDte: string;        // ← NUEVO campo
+  tipoDte: string;
   nit: string;
   quantity: number;
   passwordPri: string;
