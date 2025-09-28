@@ -12,12 +12,10 @@ function App() {
       </header>
       
       <main className="max-w-4xl mx-auto">
-        {/* Request Form (ahora incluye el select) */}
         <section className="mb-6">
           <RequestForm />
         </section>
         
-        {/* Response Box */}
         <section>
           <ResponseBox />
         </section>

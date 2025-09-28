@@ -18,7 +18,7 @@ export const ResponseBox = () => {
     );
   }
 
-  // ✅ CAMBIO: Usar ApiResult en lugar de 'any'
+
   if (response?.data?.results) {
     const failedResult = response.data.results.find((result: ApiResult) => result.ok === false);
     if (failedResult) {

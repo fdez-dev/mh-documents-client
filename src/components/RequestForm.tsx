@@ -1,129 +1,14 @@
 import React from "react";
 import { useApiStore } from "../stores/client.store";
-import type { FormField } from "../types/client.types";
-
-const FORM_FIELDS: FormField[] = [
-  {
-    name: "tipoDte",
-    label: "Tipo DTE",
-    type: "text",
-    required: true,
-    placeholder: "01",
-  },
-  {
-    name: "nit",
-    label: "NIT",
-    type: "text",
-    required: true,
-    placeholder: "06142752450017",
-  },
-  {
-    name: "quantity",
-    label: "Cantidad",
-    type: "number",
-    required: true,
-    placeholder: "1",
-  },
-  {
-    name: "passwordPri",
-    label: "Password",
-    type: "text",
-    required: true,
-    placeholder: "Contraseña de certificado",
-  },
-  {
-    name: "nrc",
-    label: "NRC",
-    type: "text",
-    required: true,
-    placeholder: "123456",
-  },
-  {
-    name: "nombre",
-    label: "Nombre",
-    type: "text",
-    required: true,
-    placeholder: "Empresa S.A. de C.V.",
-  },
-  {
-    name: "codActividad",
-    label: "Código Actividad",
-    type: "text",
-    required: true,
-    placeholder: "62010",
-  },
-  {
-    name: "descActividad",
-    label: "Descripción Actividad",
-    type: "text",
-    required: true,
-    placeholder: "Servicio de transporte",
-  },
-  {
-    name: "token",
-    label: "Token",
-    type: "textarea",
-    required: true,
-    placeholder: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  },
-];
-
-const DOCUMENT_OPTIONS = [
-  { value: "fe", label: "Factura Electrónica (FE)" },
-  { value: "ccf", label: "Crédito Fiscal (CCF)" },
-  { value: "nc", label: "Nota de Crédito (NC)" },
-  { value: "nd", label: "Nota de Débito (ND)" },
-  { value: "fse", label: "Factura Sujeto Excluido (FSE)" },
-  { value: "nre", label: "Nota de Recepción (NRE)" },
-  { value: "ctn", label: "Comprobante Técnico (CTN)" },
-  { value: "anulation", label: "Anulación" },
-];
-
-const NumericInput = ({
-  value,
-  onChange,
-  placeholder,
-  required,
-  disabled,
-  maxLength,
-  id,
-}: {
-  value: string | number;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  required?: boolean;
-  disabled?: boolean;
-  maxLength?: number;
-  id?: string;
-}) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const numericValue = e.target.value.replace(/[^0-9]/g, "");
-    if (!maxLength || numericValue.length <= maxLength) {
-      onChange(numericValue);
-    }
-  };
-
-  return (
-    <input
-      id={id}
-      type="text"
-      value={value}
-      onChange={handleChange}
-      placeholder={placeholder}
-      required={required}
-      disabled={disabled}
-      maxLength={maxLength}
-      className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed transition duration-150 ease-in-out placeholder-gray-400"
-    />
-  );
-};
+import { FORM_FIELDS } from "../constants/form.fields";
+import { SelectDocument } from "./SelectDocument";
+import {NumericInput} from "./NumericInput";
 
 export const RequestForm = () => {
   const {
     formData,
     updateFormData,
     selectedDocumentType,
-    setDocumentType,
     executeRequest,
     isLoading,
     resetForm,
@@ -137,29 +22,8 @@ export const RequestForm = () => {
   if (!selectedDocumentType) {
     return (
       <div className="bg-white shadow-md rounded-lg p-6">
-        <div className="mb-4">
-          <label
-            htmlFor="document-select"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
-            Tipo de Documento:
-          </label>
-          <select
-            id="document-select"
-            value={selectedDocumentType || ""}
-            onChange={(e) => setDocumentType(e.target.value as any)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-          >
-            <option value="">-- Selecciona un tipo de documento --</option>
-            {DOCUMENT_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center">
+        <SelectDocument />
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center mt-4">
           <p className="text-yellow-700 font-medium">
             Por favor selecciona un tipo de documento para mostrar el formulario
           </p>
@@ -170,27 +34,7 @@ export const RequestForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
-      <div className="mb-6">
-        <label
-          htmlFor="document-select"
-          className="block text-sm font-medium text-gray-700 mb-2"
-        >
-          Tipo de Documento:
-        </label>
-        <select
-          id="document-select"
-          value={selectedDocumentType}
-          onChange={(e) => setDocumentType(e.target.value as any)}
-          disabled={isLoading}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed transition duration-150 ease-in-out"
-        >
-          {DOCUMENT_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
+      <SelectDocument />
 
       <h3 className="text-xl font-semibold text-gray-800 mb-6 border-b pb-2">
         Datos del Documento - {selectedDocumentType.toUpperCase()}
@@ -198,7 +42,12 @@ export const RequestForm = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         {FORM_FIELDS.map((field) => (
-          <div key={field.name} className="flex flex-col">
+          <div
+            key={field.name}
+            className={`flex flex-col ${
+              field.name === "token" ? "md:col-span-2" : ""
+            }`}
+          >
             <label
               htmlFor={field.name}
               className="text-sm font-medium text-gray-700 mb-1"
@@ -214,10 +63,12 @@ export const RequestForm = () => {
                 required={field.required}
                 disabled={isLoading}
                 placeholder={field.placeholder}
-                rows={3}
+                rows={2}
                 className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed transition duration-150 ease-in-out placeholder-gray-400"
               />
-            ) : ["tipoDte","nit", "nrc", "codActividad"].includes(field.name) ? (
+            ) : ["tipoDte", "nit", "nrc", "codActividad"].includes(
+                field.name
+              ) ? (
               <NumericInput
                 id={field.name}
                 value={formData[field.name] as string | number}
@@ -231,10 +82,13 @@ export const RequestForm = () => {
                 required={field.required}
                 disabled={isLoading}
                 maxLength={
-                  field.name === "tipoDte" ? 2 :
-                  field.name === "nit" ? 14 : 
-                  field.name === "nrc" ? 6 : 
-                  5
+                  field.name === "tipoDte"
+                    ? 2
+                    : field.name === "nit"
+                    ? 14
+                    : field.name === "nrc"
+                    ? 6
+                    : 5
                 }
               />
             ) : (
