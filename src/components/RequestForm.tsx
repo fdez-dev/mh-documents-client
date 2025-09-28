@@ -1,14 +1,6 @@
 import React from "react";
 import { useApiStore } from "../stores/client.store";
-import type { RequestBody } from "../types/client.types";
-
-interface FormField {
-  name: keyof RequestBody;
-  label: string;
-  type: "text" | "textarea" | "number" | "password";
-  required: boolean;
-  placeholder: string;
-}
+import type { FormField } from "../types/client.types";
 
 const FORM_FIELDS: FormField[] = [
   {

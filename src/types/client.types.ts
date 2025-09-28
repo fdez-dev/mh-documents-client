@@ -34,3 +34,11 @@ export interface ApiResponse {
   statusText: string;
   timestamp: Date;
 }
+
+export interface FormField {
+  name: keyof RequestBody;
+  label: string;
+  type: "text" | "textarea" | "number" | "password";
+  required: boolean;
+  placeholder: string;
+}
