@@ -3,14 +3,11 @@ import type { DocumentType, RequestBody, ApiResponse } from '../types/client.typ
 import { apiService } from '../services/client.service';
 
 interface ApiStore {
-
   formData: RequestBody;
-  
   selectedDocumentType: DocumentType | null;
   isLoading: boolean;
   response: ApiResponse | null;
   error: string | null;
-  
   updateFormData: (field: keyof RequestBody, value: string | number) => void;
   setDocumentType: (type: DocumentType) => void;
   executeRequest: () => Promise<void>;
