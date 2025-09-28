@@ -1,4 +1,5 @@
 import { useApiStore } from '../stores/client.store';
+import type { ApiResult } from '../types/client.types';
 
 export const ResponseBox = () => {
   const { response, error, isLoading, clearResponse } = useApiStore();
@@ -17,8 +18,9 @@ export const ResponseBox = () => {
     );
   }
 
+  // ✅ CAMBIO: Usar ApiResult en lugar de 'any'
   if (response?.data?.results) {
-    const failedResult = response.data.results.find((result: any) => result.ok === false);
+    const failedResult = response.data.results.find((result: ApiResult) => result.ok === false);
     if (failedResult) {
       return (
         <div className="bg-red-50 border border-red-200 rounded-lg p-6">

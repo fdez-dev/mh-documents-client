@@ -12,8 +12,24 @@ export interface RequestBody {
   token: string;
 }
 
+//Tipado específico para los resultados individuales
+export interface ApiResult {
+  ok: boolean;
+  message: string;
+  error?: string;
+}
+
+//Tipado específico para la respuesta de la API
+export interface ApiResponseData {
+  ok: boolean;
+  status: number;
+  message: string;
+  results?: ApiResult[];
+}
+
+//Tipado completo de la respuesta
 export interface ApiResponse {
-  data: any;
+  data: ApiResponseData;
   status: number;
   statusText: string;
   timestamp: Date;

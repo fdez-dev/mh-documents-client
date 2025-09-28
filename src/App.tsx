@@ -1,4 +1,3 @@
-import { SelectDocument } from './components/SelectDocument';
 import { RequestForm } from './components/RequestForm';
 import { ResponseBox } from './components/ResponseBox';
 
@@ -12,26 +11,15 @@ function App() {
         <p className="text-gray-600 mt-2">Sistema de generación de documentos fiscales</p>
       </header>
       
-      <main className="max-w-7xl mx-auto">
-        {/* Select Document */}
+      <main className="max-w-4xl mx-auto">
+        {/* Request Form (ahora incluye el select) */}
         <section className="mb-6">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <SelectDocument />
-          </div>
-        </section>
-        
-        {/* Request Form */}
-        <section className="mb-6">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <RequestForm />
-          </div>
+          <RequestForm />
         </section>
         
         {/* Response Box */}
         <section>
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <ResponseBox />
-          </div>
+          <ResponseBox />
         </section>
       </main>
     </div>

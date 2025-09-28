@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { DocumentType, RequestBody, ApiResponse } from '../types/client.type';
+import type { DocumentType, RequestBody, ApiResponse } from '../types/client.types';
 import { apiService } from '../services/client.service';
 
 interface ApiStore {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { DocumentType, RequestBody, ApiResponse } from '../types/client.type';
+import type { DocumentType, RequestBody, ApiResponse } from '../types/client.types';
 
 const apiClient = axios.create({
   baseURL: 'http://192.168.0.14:5000',
