@@ -1,4 +1,11 @@
-export type DocumentType = 'fe' | 'nc' | 'nd' | 'fse' | 'nre' | 'ctn' | 'anulation';
+export type DocumentType =
+  | "fe"
+  | "nc"
+  | "nd"
+  | "fse"
+  | "nre"
+  | "ctn"
+  | "anulation";
 
 export interface RequestBody {
   tipoDte: string;
@@ -33,12 +40,4 @@ export interface ApiResponse {
   status: number;
   statusText: string;
   timestamp: Date;
-}
-
-export interface FormField {
-  name: keyof RequestBody;
-  label: string;
-  type: "text" | "textarea" | "number" | "password";
-  required: boolean;
-  placeholder: string;
 }

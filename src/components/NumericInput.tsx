@@ -1,14 +1,5 @@
 import React from "react";
-
-interface NumericInputProps {
-  value: string | number;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  required?: boolean;
-  disabled?: boolean;
-  maxLength?: number;
-  id?: string;
-}
+import type { NumericInputProps } from "../types/form.types";
 
 export const NumericInput: React.FC<NumericInputProps> = ({
   value,

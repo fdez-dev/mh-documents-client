@@ -1,4 +1,4 @@
-import type { FormField } from "../types/client.types";
+import type { FormField } from "../types/form.types";
 
 export const FORM_FIELDS: FormField[] = [
   {

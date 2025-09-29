@@ -1,4 +1,6 @@
-export const DOCUMENT_OPTIONS = [
+import type { DocumentType } from "../types/api.types";
+
+export const DOCUMENT_OPTIONS: { value: DocumentType; label: string }[] = [
   { value: "fe", label: "Factura Electrónica (FE)" },
   { value: "nc", label: "Nota de Crédito (NC)" },
   { value: "nd", label: "Nota de Débito (ND)" },
