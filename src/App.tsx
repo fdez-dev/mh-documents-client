@@ -10,12 +10,10 @@ function App() {
         </h2>
         <p className="text-gray-600 mt-2">Sistema de generación de documentos fiscales</p>
       </header>
-      
       <main className="max-w-4xl mx-auto">
         <section className="mb-6">
           <RequestForm />
         </section>
-        
         <section>
           <ResponseBox />
         </section>
