@@ -50,8 +50,11 @@ export const useApiStore = create<ApiStore>((set, get) => ({
         formData
       );
       set({ response, isLoading: false });
-    } catch (error: any) {
-      set({ error: error.message, isLoading: false });
+    } catch (error: unknown) {
+      set({
+        error: error instanceof Error ? error.message : "Error desconocido",
+        isLoading: false,
+      });
     }
   },
 

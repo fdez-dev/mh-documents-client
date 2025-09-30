@@ -1,13 +1,14 @@
 import React from "react";
 import { useApiStore } from "../stores/document.store";
 import { DOCUMENT_OPTIONS } from "../constants/document.options";
+import type { DocumentType } from "../types/api.types";
 
 export const SelectDocument = () => {
   const { selectedDocumentType, setDocumentType } = useApiStore();
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const type = event.target.value;
-    setDocumentType(type as any);
+    const type = event.target.value as DocumentType;
+    setDocumentType(type);
   };
 
   return (

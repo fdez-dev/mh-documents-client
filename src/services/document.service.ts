@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import type { DocumentType, RequestBody, ApiResponse } from "../types/api.types";
 import { ENDPOINT_URLS } from "../constants/api.constants";
 
@@ -27,12 +27,18 @@ export const ApiService = {
         statusText: response.statusText,
         timestamp: new Date(startTime),
       };
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        error.message ||
-        "Error desconocido al procesar la solicitud";
+    } catch (error: unknown) {
+      let errorMessage = "Error desconocido al procesar la solicitud";
+
+      if (isAxiosError(error)) {
+        errorMessage =
+          error.response?.data?.message ||
+          error.response?.data?.error ||
+          error.message;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
       throw new Error(errorMessage);
     }
   },
